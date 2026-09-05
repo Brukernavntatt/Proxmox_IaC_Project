@@ -1,0 +1,28 @@
+# --- Virtual Machines --- #
+vms = {
+  "webserver-1" = {
+    vm_id            = 950
+    vm_ip            = "192.168.50.230/24"
+    username         = "viktor"
+    ssh_pub_key_path = "~/.ssh/proxmox-nøkkel.pub"
+  }
+
+  # Use a different cloud-image # (Ubuntu instead of Fedora in this scenario) #
+  "database-1" = {
+    vm_id            = 951
+    vm_ip            = "192.168.50.231/24"
+    username         = "leon"
+    ssh_pub_key_path = "~/.ssh/proxmox-nøkkel.pub"
+    memory = 4096
+
+
+    cloud_image = {
+      url       = "https://cloud-images.ubuntu.com/noble/current/noble-server-cloudimg-amd64.img"
+      file_name = "ubuntu-server-24.04.img"
+    }
+
+     cpu = {
+      cores = 4
+     }
+  }
+}

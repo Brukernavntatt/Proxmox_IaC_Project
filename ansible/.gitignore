@@ -1,0 +1,57 @@
+# personal file
+*.sh
+
+# Ansible retry files
+*.retry
+
+# Vault files (om man bruker ansible-vault)
+*.vault
+vault-password.txt
+
+# Secrets / credentials
+secrets/
+secret/
+*.secret
+*.pem
+*.key
+*.crt
+
+# SSH keys
+.ssh/
+id_rsa
+id_ed25519
+ansible_key
+
+# Local inventory files
+inventory/hosts.ini
+inventory/*/hosts.ini
+
+# Host/group vars with secrets
+inventory/group_vars/*/vault.yml
+inventory/group_vars/*/secrets.yml
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Ansible collections installed locally
+collections/
+
+# Ansible Galaxy downloaded roles
+roles/
+
+# Molecule cache
+.molecule/
+
+# IDE/editor files
+.vscode/
+.idea/
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Temporary files
+*.tmp
+*.log
+*.swp

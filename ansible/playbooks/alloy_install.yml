@@ -1,0 +1,12 @@
+- name: Install Alloy
+  hosts: monitoring_targets
+  become: true
+
+  vars:
+    alloy_config: "{{ lookup('template', 'templates/alloy.config.alloy.j2') }}"
+
+  roles:
+    - role: grafana.grafana.alloy
+      vars:
+        alloy_user_groups:
+          - systemd-journal

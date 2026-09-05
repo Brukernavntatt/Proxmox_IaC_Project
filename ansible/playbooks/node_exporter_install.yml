@@ -1,0 +1,17 @@
+- name: configuring monitoring agents
+  hosts: monitoring_targets
+  become: true
+
+  tasks:
+
+    - name: Install node-exporter
+      dnf:
+        name: node_exporter
+        state: present
+
+    - name: Enable node-exporter
+      systemd:
+        name: node_exporter
+        enabled: true
+        state: started
+

@@ -1,0 +1,23 @@
+---
+
+- name: installing httpd
+  hosts: webserver
+  become: true
+
+  tasks:
+    - name:
+      command: localectl set-x11-keymap no
+      become: true
+
+    - name: Install httpd
+      dnf:
+        name: httpd
+        state: present
+
+    - name: enable apache
+      systemd:
+        name: httpd
+        state: started
+        enabled: true
+
+

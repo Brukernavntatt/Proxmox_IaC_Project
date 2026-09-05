@@ -1,0 +1,46 @@
+ loki.relabel "journal" {
+            rule {
+              source_labels = ["__journal_syslog_identifier"]
+              target_label = "service"
+            }
+
+            rule {
+              source_labels = ["__journal__systemd_unit"]
+              target_label = "unit"
+            }
+
+            rule {
+              target_label = "host"
+              replacement = "{{ inventory_hostname }}"
+            }
+
+            forward_to = [
+              loki.write.loki.receiver,
+            ]
+          }
+
+          loki.source.journal "journal" {
+            forward_to = [
+              loki.process.filter.receiver,
+            ]
+
+            relabel_rules = loki.relabel.journal.rules
+          }
+
+          loki.process "filter" {
+
+            stage.drop {
+              expression = ".*guest-ping.*"
+              drop_counter_reason = "qemu_ping"
+            }
+
+            forward_to = [
+              loki.write.loki.receiver,
+            ]
+          }
+
+          loki.write "loki" {
+            endpoint {
+              url = "{{ loki_url }}"
+            }
+          }
