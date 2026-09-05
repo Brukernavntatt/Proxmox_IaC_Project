@@ -15,7 +15,7 @@ variable "vms" {
   type = map(object({
     vm_id            = number
     vm_ip            = string
-    username         = optional(string, "dani")
+    username         = optional(string, "viktor")
     ssh_pub_key_path = optional(string, "~/.ssh/proxmox-nøkkel.pub")
 
     cloud_image = optional(object({
